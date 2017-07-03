@@ -13,3 +13,8 @@ can use it. "
 This mainly works on Python 2.7, needs to be updated to 3.0.
 
 There is a bug in mplotlab(?), can only run below and including version 1.5.
+
+AUTO-07P :
+CONTINUATION AND BIFURCATION SOFTWARE
+FOR ORDINARY DIFFERENTIAL EQUATIONS
+http://www.dam.brown.edu/people/sandsted/auto/auto07p.pdf
