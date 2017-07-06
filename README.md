@@ -18,3 +18,6 @@ AUTO-07P :
 CONTINUATION AND BIFURCATION SOFTWARE
 FOR ORDINARY DIFFERENTIAL EQUATIONS
 http://www.dam.brown.edu/people/sandsted/auto/auto07p.pdf
+
+07/07/2017
+Fix the zooming problem first, worry about Python 3 later.
