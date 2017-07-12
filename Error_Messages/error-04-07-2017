@@ -1,0 +1,15 @@
+couple ... done
+Traceback (most recent call last):
+  File "couple2.auto", line 11, in <module>
+    b1=run(bp1('BP1'),ISW=-1,ICP=[1,4],DS=0.1)
+  File "/afs/ec.auckland.ac.nz/users/e/l/elee353/unixhome/Downloads/auto07p/auto/07p/python/bifDiag.py", line 141, in __call__
+    return self.getLabel(label)
+  File "/afs/ec.auckland.ac.nz/users/e/l/elee353/unixhome/Downloads/auto07p/auto/07p/python/bifDiag.py", line 138, in getLabel
+    return sols(label)
+  File "/afs/ec.auckland.ac.nz/users/e/l/elee353/unixhome/Downloads/auto07p/auto/07p/python/parseS.py", line 223, in __call__
+    return self.getLabel(label)
+  File "/afs/ec.auckland.ac.nz/users/e/l/elee353/unixhome/Downloads/auto07p/auto/07p/python/parseS.py", line 383, in getLabel
+    raise KeyError("Label %s not found"%label)
+KeyError: 'Label BP1 not found'
+AUTO> 
+
