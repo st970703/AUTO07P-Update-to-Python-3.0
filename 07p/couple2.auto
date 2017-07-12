@@ -1,0 +1,15 @@
+couple=load('couple')
+ff=run(couple)
+bp1=run(ff('BP1'),ISW=2,ICP=[4,1],DS=0.2)
+bp2=run(ff('BP1'),ISW=2,ICP=[4,1],DS=-0.2)
+b1=run(ff('BP2'),ISW='2',ICP=[1,4],DS=0.2)
+b2=run(ff('BP2'),ISW='2',ICP=[1,4],DS=-0.2)
+bp=relabel(bp1+bp2)
+plot(bp)
+# find hopf points
+bp1=run(ff('BP1'),ISW=2,ICP=[4,1],DS=0.2)
+b1=run(bp1('BP1'),ISW=-1,ICP=[1,4],DS=0.1)
+p4=run(b1('HB1'),IPS=2,DS=-0.1,ICP=[4,1])
+p5=run(b1('HB2'),IPS=2,DS=-0.1,ICP=[4,1])
+pp=relabel(bp1+bp2+b1+p4+p5)
+

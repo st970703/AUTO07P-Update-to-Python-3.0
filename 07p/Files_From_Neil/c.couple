@@ -1,0 +1,21 @@
+parnames = {1:'delta', 2:'kappa',3:'phi', 4:'f', 5:'gamma', 6:'AA', 7:'BB'}
+unames = {1:'Ar', 2:'Ai',3:'Br', 4:'Bi'}
+NPAR= 7
+NDIM=   4
+NBC=  0
+IPS =   1
+IRS =   0
+ILP =   1
+SP = ['LP','HB','BP']
+ICP =  ['f','delta','AA','BB']
+RL0 = -15.0
+RL1 = 35
+NTST=   500, NCOL=   4, IAD =   3, ISP =   2, ISW = 1, IPLT= 0, NINT= 0
+NMX=  9000, NPR=   60, MXBF=   0, IID =   2, ITMX= 8, ITNW= 15, NWTN= 5, JAC= 0
+EPSL= 1e-6, EPSU = 1e-8, EPSS =1e-4
+DS  =  1e-6, DSMIN= 1e-16, DSMAX=   0.01, IADS=   1
+ THL =  {}, THU =  {}
+!STOP=['BP2']
+ UZR ={'f': [0.1,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,10,20]}
+ UZSTOP = {'f': 20.0}
+
