@@ -27,5 +27,5 @@ How to run on Windows
 http://people.unica.it/massimilianogrosso/auto-on-windows/
 
 Some commands:
-plot(run("couple"))
-auto("couple2.auto")
+plot(run("couple"))  
+auto("couple2.auto")  
