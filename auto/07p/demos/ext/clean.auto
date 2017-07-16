@@ -1,8 +1,0 @@
-
-#==============
-# AUTO Demo ext
-#==============
-
-print "\n***Clean the directory***"
-dl('ext')
-cl()

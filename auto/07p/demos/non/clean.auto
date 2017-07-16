@@ -1,8 +1,0 @@
-
-#==============
-# AUTO Demo non
-#==============
-
-print "\n***Clean the directory***"
-dl('non')
-cl()

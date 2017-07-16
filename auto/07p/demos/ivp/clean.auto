@@ -1,8 +1,0 @@
-
-#==============
-# AUTO Demo ivp
-#==============
-
-print "\n***Clean the directory***"
-dl('ivp')
-cl()

@@ -1,8 +1,0 @@
-
-#=============
-# AUTO Demo ab
-#=============
-
-print "\n***Clean the directory***"
-dl('ab')
-cl()

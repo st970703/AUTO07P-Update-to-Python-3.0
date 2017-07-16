@@ -1,3 +1,0 @@
-#!/usr/bin/env auto
-import test
-test.test('all97')

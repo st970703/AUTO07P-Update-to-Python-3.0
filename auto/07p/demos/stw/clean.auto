@@ -1,8 +1,0 @@
-
-#==============
-# AUTO Demo stw
-#==============
-
-print "\n***Clean the directory***"
-dl('stw')
-cl()

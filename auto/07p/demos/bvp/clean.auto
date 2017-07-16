@@ -1,8 +1,0 @@
-
-#=============
-# AUTO Demo bvp
-#=============
-
-print "\n***Clean the directory***"
-dl('bvp')
-cl()

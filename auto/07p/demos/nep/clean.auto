@@ -1,8 +1,0 @@
-
-#==============
-# AUTO Demo nep
-#==============
-
-print "\n***Clean the directory***"
-dl('nep')
-cl()

@@ -1,9 +1,0 @@
-
-#==============
-# AUTO Demo fsh
-#==============
-
-print "\n***Clean the directory***"
-dl('0')
-dl('fsh')
-cl()

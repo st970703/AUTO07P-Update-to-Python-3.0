@@ -1,8 +1,0 @@
-
-#==============
-# AUTO Demo hen
-#==============
-
-print "\n***Clean the directory***"
-delete('log')
-clean()
