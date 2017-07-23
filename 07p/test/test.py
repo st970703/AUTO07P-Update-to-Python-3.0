@@ -75,9 +75,9 @@ def test(demos, versions=None, log_file=None, parse=True):
 
     autofiles = []
     for d in demos:
-        print("Doing "+d)
+        print(("Doing "+d))
         for version in versions:
-            print("Version "+version)
+            print(("Version "+version))
             auto_dir=os.path.join(os.environ["AUTO_DIR"],"..",version)
             demo_dir=os.path.join(auto_dir,"demos",d)
             autofiles = []
@@ -135,13 +135,13 @@ if __name__ == '__main__':
     for x in opts_list:
         opts[x[0]]=x[1]
 
-    if opts.has_key("-c"):
+    if "-c" in opts:
         versions.append("2000")
-    if opts.has_key("-f"):
+    if "-f" in opts:
         versions.append("97")
-    if opts.has_key("-p"):
+    if "-p" in opts:
         versions.append("07p")
-    if opts.has_key("-l"):
+    if "-l" in opts:
         log_file=opts["-l"]
 
     demos = args[0]

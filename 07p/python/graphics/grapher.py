@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 try:
-    import Tkinter
-    import tkSimpleDialog
-    import tkFileDialog
+    import tkinter
+    import tkinter.simpledialog
+    import tkinter.filedialog
 except ImportError:
     import tkinter as Tkinter # Python 3
     from tkinter import simpledialog as tkSimpleDialog
@@ -17,7 +17,7 @@ import string
 GrapherError="GrapherError"
 Axes3D=None
 
-class BasicGrapher(optionHandler.OptionHandler,Tkinter.Canvas):
+class BasicGrapher(optionHandler.OptionHandler,tkinter.Canvas):
     """Documentation string for Basic Grapher
 
     A simple graphing widget
@@ -79,8 +79,8 @@ class BasicGrapher(optionHandler.OptionHandler,Tkinter.Canvas):
         if kw.get("hide") and 'graphics.grapher_mpl' in sys.modules:
             optionHandler.OptionHandler.__init__(self)
         else:
-            Tkinter.Canvas.__init__(self,parent)
-            optionHandler.OptionHandler.__init__(self,Tkinter.Canvas)
+            tkinter.Canvas.__init__(self,parent)
+            optionHandler.OptionHandler.__init__(self,tkinter.Canvas)
 
         for key in list(kw):
             if key not in optionDefaults:
@@ -166,7 +166,7 @@ class BasicGrapher(optionHandler.OptionHandler,Tkinter.Canvas):
         # check type for next data
         try:
             zcolumn = self.cget(self.cget("type")+"_z")
-        except Tkinter.TclError: #in regression test
+        except tkinter.TclError: #in regression test
             return
         if zcolumn is not None:
             self._configNoDraw({self.cget("type")+"_z":None})
@@ -792,18 +792,18 @@ class InteractiveGrapher(LabeledGrapher):
                 if tag[0] == "curve":
                     curve=int(tag[1])
         if not((point is None) or (curve is None)):
-            label = tkSimpleDialog.askstring("Label","Enter here")
+            label = tkinter.simpledialog.askstring("Label","Enter here")
             self.addLabel(curve,point,label)
 
     def printTagWrapper(self,e):
         theid=self.find("closest",e.x,e.y)
-        print(self.gettags(theid[0]))
+        print((self.gettags(theid[0])))
         
     def printValueWrapper(self,e):
         self.__printValue((e.x,e.y))
 
     def __printValue(self,val):
-        print(self.canvasToValue(val))
+        print((self.canvasToValue(val)))
 
     def zoomRubberBand(self,e):
         self.delete("rubber_band")
@@ -849,7 +849,7 @@ class GUIGrapher(InteractiveGrapher):
     def __init__(self,parent=None,**kw):
         InteractiveGrapher.__init__(self,parent,**kw)
         self.bind("<ButtonPress-3>",self.popupMenuWrapper)
-        self.menu=Tkinter.Menu()
+        self.menu=tkinter.Menu()
         self.menu.add_radiobutton(label="print value",command=self.printValueBindings)
 #        self.menu.add_radiobutton(label="print tag",command=self.printTagBindings)
 #        self.menu.add_radiobutton(label="label point",command=self.labelPointBindings)
@@ -870,18 +870,18 @@ class GUIGrapher(InteractiveGrapher):
                                               dblclickcommand=self.__updateInteractiveConfigureDialog)
         self.optionList.pack(side="left")
 
-        frame = Tkinter.Frame(diag.interior())
+        frame = tkinter.Frame(diag.interior())
         frame.pack(side="right")
         self.optionLabel = Pmw.EntryField(frame,
                                          labelpos="w",
                                          label_text="Option Name",
-                                         entry_state=Tkinter.DISABLED)
+                                         entry_state=tkinter.DISABLED)
         self.optionLabel.pack(side="top")
 
         self.valueLabel = Pmw.EntryField(frame,
                                          labelpos="w",
                                          label_text="Old Value",
-                                         entry_state=Tkinter.DISABLED)
+                                         entry_state=tkinter.DISABLED)
         self.valueLabel.pack(side="top")
 
         self.valueEntry = Pmw.EntryField(frame,
@@ -919,7 +919,7 @@ class GUIGrapher(InteractiveGrapher):
         if pscolormode is None:
             pscolormode=self.cget("ps_colormode")
         if filename is None:
-            filename = tkFileDialog.asksaveasfilename(defaultextension=".eps",title="Save as Postscript File")
+            filename = tkinter.filedialog.asksaveasfilename(defaultextension=".eps",title="Save as Postscript File")
         self.update()
         self.postscript(file=filename,colormode=pscolormode)
 
@@ -961,17 +961,17 @@ def test(grapher=None):
     grapher.pack()
     grapher.plot()
 
-    button = Tkinter.Button(text="Quit",command=grapher.quit)
+    button = tkinter.Button(text="Quit",command=grapher.quit)
     button.pack()
     button.update()
     print("Press <return> to continue")
-    raw_input()
+    input()
 
     grapher.delAllData()
     grapher.addArray((data,list(map(math.cos,data))))
     grapher.plot()
     print("Press <return> to continue")
-    raw_input()
+    input()
 
 if __name__=='__main__':
     test()

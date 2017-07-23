@@ -4,7 +4,7 @@
 import math
 import sys
 try:
-    import Tkinter
+    import tkinter
 except ImportError:
     import tkinter as Tkinter # Python 3
 
@@ -17,16 +17,16 @@ _MAX_RGB = float(256 * 256 - 1) # max size of rgb values returned from Tk
 def setscheme(root, background=None, **kw):
     root = root._root()
     palette = _calcPalette(root, background,**kw)
-    for option, value in palette.items():
+    for option, value in list(palette.items()):
         root.option_add('*' + option, value, 'widgetDefault')
 
 def getdefaultpalette(root):
     # Return the default values of all options, using the defaults
     # from a few widgets.
 
-    ckbtn = Tkinter.Checkbutton(root)
-    entry = Tkinter.Entry(root)
-    scbar = Tkinter.Scrollbar(root)
+    ckbtn = tkinter.Checkbutton(root)
+    entry = tkinter.Entry(root)
+    scbar = tkinter.Scrollbar(root)
 
     orig = {}
     orig['activeBackground'] = str(ckbtn.configure('activebackground')[4])
@@ -215,7 +215,7 @@ def _calcPalette(root, background=None, **kw):
     # Create a map that has the complete new palette.  If some colors
     # aren't specified, compute them from other colors that are specified.
     new = {}
-    for key, value in kw.items():
+    for key, value in list(kw.items()):
         new[key] = value
     if background is not None:
         new['background'] = background

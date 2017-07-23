@@ -6,7 +6,7 @@ def get(sfile,label,step,floquet=None):
     solution = s(label)
     if floquet is None:
         floquet = solution.PAR(4)
-    print("Floquet multiplier: %s"%floquet)
+    print(("Floquet multiplier: %s"%floquet))
     return load(solution,LAB=1,PAR={4:floquet,5:0,6:step})
 
 def make_s(sfile,label,step,floquet=None):

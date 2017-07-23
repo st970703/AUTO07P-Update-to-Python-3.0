@@ -4,7 +4,7 @@ from graphics import windowPlotter
 import code
 import sys
 try:
-    import Tkinter
+    import tkinter
 except ImportError:
     import tkinter as Tkinter
 import select
@@ -23,7 +23,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
         if locals is None:
             return
         
-        root=Tkinter.Tk()
+        root=tkinter.Tk()
         root.withdraw()
         self.handle = windowPlotter.WindowPlotter2D(root)
         self.handle.protocol("WM_DELETE_WINDOW", self.destroy)
@@ -51,7 +51,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
         for i in range(5):
             if "d"+str(i) not in config:
                 di = {}
-                for k,v in doptions.items():
+                for k,v in list(doptions.items()):
                     di[k] = v[i]
                 dict["d"+str(i)] = (di,None)
         if "default_option" not in config:
@@ -72,7 +72,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
             "bifurcation_diagram": bd,
             "solution": bd(),
             "letter_symbols": False }
-        for k,v in self[self["default_option"]].items():
+        for k,v in list(self[self["default_option"]].items()):
             dict[k] = v
         for key in list(dict):
             # check if key was set in .autorc
@@ -104,7 +104,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
                     print(" ENTER <B3D> COMMAND\n")
                 else:
                     print(" ENTER COMMAND\n")
-                line = raw_input(prompt)
+                line = input(prompt)
             line = self.process_input(line)
 
     def destroy(self):
@@ -170,15 +170,15 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
             try:
                 if self.b3d:
                     print(' ENTER THE NEW THREE AXES FOR (X,Y,Z) <B3D>')
-                    line = raw_input().replace(","," ")
-                    [xaxis,yaxis,zaxis] = map(int,line.split())
+                    line = input().replace(","," ")
+                    [xaxis,yaxis,zaxis] = list(map(int,line.split()))
                     self["bifurcation_x"] = [xaxis-1]
                     self["bifurcation_y"] = [yaxis-1]
                     self["bifurcation_z"] = [zaxis-1]
                 else:
                     print(' ENTER HORIZONTAL AND VERTICAL AXIS NUMBER (1,2,...) :')
-                    line = raw_input().replace(","," ")
-                    [xaxis,yaxis] = map(int,line.split())
+                    line = input().replace(","," ")
+                    [xaxis,yaxis] = list(map(int,line.split()))
                     self["bifurcation_x"] = [xaxis-1]
                     self["bifurcation_y"] = [yaxis-1]
             except:
@@ -261,7 +261,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
 
     def savefile(self):
         print(' ENTER FILE NAME:')
-        flname = raw_input().strip()
+        flname = input().strip()
         if flname == '':
             flname = 'fig.1'
         self.handle.grapher.postscript(flname)
@@ -275,10 +275,10 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
             if axlb:
                 if raxlb:
                     if not self.expert:
-                        print (' ENTER '+ key[0].upper() +
-                               ' AXIS LABEL BETWEEN THE QUOTES')
+                        print((' ENTER '+ key[0].upper() +
+                               ' AXIS LABEL BETWEEN THE QUOTES'))
                     print(' "                              "')
-                    setattr(self, key, raw_input().strip())
+                    setattr(self, key, input().strip())
                 label = getattr(self, key)
             else:
                 label = ""
@@ -292,7 +292,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
             if not self.expert:
                 print(' ENTER TOP TITLE BETWEEN THE QUOTES')
             print(' "                                                            "')
-            self.top_title = raw_input().strip()
+            self.top_title = input().strip()
 
             #if not self.expert:
             #    print ' ENTER BOTTOM TITLE BETWEEN THE QUOTES'
@@ -324,13 +324,13 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
             print(' LAB')
         else:
             print(' SOLUTION LABELS ?  ( <Y> OR <N> ) ')
-        line = raw_input().strip()
+        line = input().strip()
         self["use_labels"] = line[0].lower() == 'y'
         if self.expert:
             print(' GL')
         else:
             print(' GRID LINES ?  (Y OR N)')
-        line = raw_input().strip()
+        line = input().strip()
         if line[0].lower() == 'y':
             self["grid"] = "yes"
         else:
@@ -341,20 +341,20 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
         raxlb = 0
         if self.expert:
             print(' T - C')
-            line = raw_input().strip()
+            line = input().strip()
             if len(line) > 0 and line[0].lower() == 'y':
                 tit = 1
                 if len(line) > 1 and line[1].lower() == 'y':
                     rtit   = 1
             print(' A - C')
-            line = raw_input().strip()
+            line = input().strip()
             if len(line) > 0 and line[0].lower() == 'y':
                 axlb = 1
                 if len(line) > 1 and line[1].lower() == 'y':
                     raxlb = 1
         else:
             print(' TITLE ?  (Y OR N)')
-            line = raw_input().strip()
+            line = input().strip()
             if len(line) > 0 and line[0].lower() == 'y':
                 tit = 1
                 if not self.ict:
@@ -362,11 +362,11 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
                     rtit = 1
                 else:
                     print(' CHANGE TITLES ?  (Y OR N)')
-                    line = raw_input().strip()
+                    line = input().strip()
                     if len(line) > 0 and line[0].lower() == 'y':
                         rtit = 1
             print(' AXES LABELS ?  (Y OR N)')
-            line = raw_input().strip()
+            line = input().strip()
             if len(line) > 0 and line[0].lower() == 'y':
                 axlb = 1
                 if not self.icl:
@@ -374,7 +374,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
                     raxlb  = 1
                 else:
                     print(' CHANGE AXES LABELS ?  (Y OR N)')
-                    line = raw_input().strip()
+                    line = input().strip()
                     if len(line) > 0 and line[0].lower() == 'y':
                         raxlb = 1
         self.settitles(tit,rtit,axlb,raxlb)
@@ -382,7 +382,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
     def enterlabels(self):
         self.listlabels()
         print('\n ENTER LABELS, OR <A> (ALL)\n')
-        line = raw_input().lower()
+        line = input().lower()
         s = self["solution"]
         if line[0] == 'a':
             self["label"] = s.getLabels()
@@ -393,12 +393,12 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
             label = []
             for lab in lablist:
                 try:
-                    lrange = map(int,lab.split('-'))
+                    lrange = list(map(int,lab.split('-')))
                 except:
                     print("    INVALID COMMAND,  REENTER")
                     return 0
                 if len(lrange) == 2:
-                    lrange = range(lrange[0],lrange[1]+1)
+                    lrange = list(range(lrange[0],lrange[1]+1))
                 label = label + lrange
             self["label"] = label
         return 1
@@ -417,7 +417,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
         self.ndim=len(s[0]["data"][0]['u'])+1
         while 1:
             its = 0
-            print('  NUMBER OF COMPONENTS :%5d'%(self.ndim))
+            print(('  NUMBER OF COMPONENTS :%5d'%(self.ndim)))
             if use3d:
                 axisstr = "%s %s %s"%(xaxsn,yaxsn,zaxsn)
             else:
@@ -425,9 +425,9 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
             axisstr = axisstr.replace("[","")
             axisstr = axisstr.replace("]","")
             axisstr = axisstr.replace(", ",",")
-            print ('  ENTER AXES  (DEFAULT %s),'\
-                   ' <D> (DISPLAY), OR <EX> (EXIT)'%axisstr)
-            line = raw_input()
+            print(('  ENTER AXES  (DEFAULT %s),'\
+                   ' <D> (DISPLAY), OR <EX> (EXIT)'%axisstr))
+            line = input()
             lower = 0
             upper = 0
             for c in line:
@@ -448,7 +448,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
                 self.enterlabels()
             else:
                 try:
-                    axislist = map(int,line.replace(","," ").split())
+                    axislist = list(map(int,line.replace(","," ").split()))
                     if use3d:
                         xaxsn = axislist[:len(axislist)/3]
                         yaxsn = axislist[len(axislist)/3:len(axislist)/3*2]
@@ -492,13 +492,13 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
                     print('  ENTER XMIN,XMAX,YMIN,YMAX,ZMIN,ZMAX')
                 else:
                     print('  ENTER XMIN,XMAX,YMIN,YMAX')
-                line = raw_input().replace(","," ")
+                line = input().replace(","," ")
                 try:
                     if self.b3d:
                         [xmin,xmax,ymin,ymax,
-                         zmin,zmax] = map(float,line.split())
+                         zmin,zmax] = list(map(float,line.split()))
                     else:
-                        [xmin,xmax,ymin,ymax] = map(float,line.split())
+                        [xmin,xmax,ymin,ymax] = list(map(float,line.split()))
                     break
                 except:
                     pass
@@ -552,7 +552,7 @@ class PyPlautInteractiveConsole(code.InteractiveConsole):
 
   Press RETURN for more or Enter Command ...
   """)
-        line = raw_input()
+        line = input()
         if line != "":
             return line
         print("""

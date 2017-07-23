@@ -40,8 +40,8 @@ except ImportError:
         Axes3D = None
 
 try:
-    import Tkinter
-    import tkFileDialog
+    import tkinter
+    import tkinter.filedialog
 except ImportError:
     import tkinter as Tkinter  # Python 3
     from tkinter import filedialog as tkFileDialog
@@ -57,7 +57,7 @@ GrapherError = "GrapherError"
 class FigureCanvasTkAggRedraw(FigureCanvasTkAgg):
     def __init__(self, grapher, parent):
         if parent is None:
-            parent = Tkinter.Tk()
+            parent = tkinter.Tk()
         parent.wm_title("PyPLAUT")
         FigureCanvasTkAgg.__init__(self, grapher.ax.get_figure(), master=parent)
 
@@ -90,7 +90,7 @@ class FigureCanvasTkAggRedraw(FigureCanvasTkAgg):
         for k in list(d):
             # don't adjust any unchanged settings
             if k == "cur_lims":
-                if map(list, d[k]) == map(list, self.grapher._cur_lims):
+                if list(map(list, d[k])) == list(map(list, self.grapher._cur_lims)):
                     del d[k]
             elif d[k] == self.grapher.cget(k):
                 del d[k]
@@ -328,7 +328,7 @@ class BasicGrapher(grapher.BasicGrapher):
         # set type for next data
         try:
             zcolumn = self.cget(self.cget("type") + "_z")
-        except Tkinter.TclError:  # in regression test
+        except tkinter.TclError:  # in regression test
             return
         oldax = self.ax
         if zcolumn is None or Axes3D is None:
@@ -652,7 +652,7 @@ class GUIGrapher(InteractiveGrapher, grapher.GUIGrapher):
         # self.bind("<ButtonPress-3>",self.popupMenuWrapper)
         if kw.get("hide"):
             return
-        self.menu = Tkinter.Menu()
+        self.menu = tkinter.Menu()
         #        self.menu.add_radiobutton(label="print tag",command=self.printTagBindings)
         #        self.menu.add_radiobutton(label="label point",command=self.labelPointBindings)
         # self.menu.add_radiobutton(label="zoom",command=self.zoomBindings)
@@ -672,18 +672,18 @@ class GUIGrapher(InteractiveGrapher, grapher.GUIGrapher):
                                               dblclickcommand=self.__updateInteractiveConfigureDialog)
         self.optionList.pack(side="left")
 
-        frame = Tkinter.Frame(diag.interior())
+        frame = tkinter.Frame(diag.interior())
         frame.pack(side="right")
         self.optionLabel = Pmw.EntryField(frame,
                                           labelpos="w",
                                           label_text="Option Name",
-                                          entry_state=Tkinter.DISABLED)
+                                          entry_state=tkinter.DISABLED)
         self.optionLabel.pack(side="top")
 
         self.valueLabel = Pmw.EntryField(frame,
                                          labelpos="w",
                                          label_text="Old Value",
-                                         entry_state=Tkinter.DISABLED)
+                                         entry_state=tkinter.DISABLED)
         self.valueLabel.pack(side="top")
 
         self.valueEntry = Pmw.EntryField(frame,
@@ -696,7 +696,7 @@ class GUIGrapher(InteractiveGrapher, grapher.GUIGrapher):
         if pscolormode is None:
             pscolormode = self.cget("ps_colormode")
         if filename is None:
-            filename = tkFileDialog.asksaveasfilename(defaultextension=".eps", title="Save the figure")
+            filename = tkinter.filedialog.asksaveasfilename(defaultextension=".eps", title="Save the figure")
         self.update()
         # self.postscript(filename,colormode=pscolormode)
         self.postscript(filename)

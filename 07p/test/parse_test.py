@@ -2,11 +2,11 @@
 #global imports for the whole file
 import re,sys,getopt,os
 try:
-    import cStringIO
+    import io
 except ImportError: # Python 3
     import io as cStringIO
 try:
-    from urllib import pathname2url
+    from urllib.request import pathname2url
 except ImportError: # Python 3
     from urllib.request import pathname2url
 import parseB
@@ -65,7 +65,7 @@ def check_demo(demo,correct_filename,trial_filename,epsilon,abseps):
     error_regex=re.compile("===%s start===.*===%s end==="%(demo,demo),re.S)
 
     # This is where the report get stored until it gets returned
-    report = cStringIO.StringIO()
+    report = io.StringIO()
 
     # Search for all possible demos in each file
     correct_file=open(correct_filename,"r")
@@ -253,8 +253,8 @@ def parse(trial_file,epsilon=None, abseps=None, demo=None, html_dir=None,
                     DEMO_MAJOR_DATA_ERROR: [],
                     DEMO_FAILED: [] }
 
-    print ("Comparing against file:  %s"%correct_file)
-    print ("Putting results in directory:  %s"%html_dir)
+    print(("Comparing against file:  %s"%correct_file))
+    print(("Putting results in directory:  %s"%html_dir))
 
     table = []
     if len(demo) == 0:
@@ -312,15 +312,15 @@ def parse(trial_file,epsilon=None, abseps=None, demo=None, html_dir=None,
                   DEMO_MAJOR_DATA_ERROR, DEMO_FAILED]:
             if len(report_list[i]) > 0:            
                 if i==DEMO_MINOR_DATA_ERROR:
-                    print(dct[i])
+                    print((dct[i]))
                     print("          Relative Error Absolute Error")
                     for lst in report_list[i]:
-                        print("%-6s: %15.7e%15.7e"%(lst[0],lst[1],lst[2]))
+                        print(("%-6s: %15.7e%15.7e"%(lst[0],lst[1],lst[2])))
                 elif len(report_list[i]) > 0:
-                    print(" ".join([dct[i]]+report_list[i]))
-        print("Please point your web browser to the following URL "
+                    print((" ".join([dct[i]]+report_list[i])))
+        print(("Please point your web browser to the following URL "
               "for detailed results:\nfile:%s"%
-              pathname2url(os.path.abspath("verification/index.html")))
+              pathname2url(os.path.abspath("verification/index.html"))))
     else:
         check_demo(demo,correct_file,trial_file,epsilon,abseps)
 

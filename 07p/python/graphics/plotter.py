@@ -312,7 +312,7 @@ class plotter(grapher.GUIGrapher):
                           "triangle", "doubletriangle",
                           "doubletriangle", "doubletriangle",
                           "doubletriangle", "doubletriangle"]
-            options.update(dict(zip(keys, values)))
+            options.update(dict(list(zip(keys, values))))
 
         # We only recreate the data if one of the above options gets set
         # We can't just recreate the data for any option since:
@@ -452,12 +452,12 @@ class plotter(grapher.GUIGrapher):
                                     col = coordnames[col]
                                     break
                             if type(col) == type(1):
-                                print("The %s-coordinate (set to column %s) "
-                                      "is out of range"%(["x","y","z"][j],col))
+                                print(("The %s-coordinate (set to column %s) "
+                                      "is out of range"%(["x","y","z"][j],col)))
                                 col = "Error"
                     elif col not in coordnames and (indepvarname is None or
                                                     col != indepvarname):
-                        print("Unknown column name: %s"%(col))
+                        print(("Unknown column name: %s"%(col)))
                         col = "Error"
                     names[j].append(labelnames.get(col, col))
 
@@ -694,23 +694,23 @@ def test():
     foo.pack()
     foo.update()
     print("Hit return to continue")
-    raw_input()
+    input()
     foo.clear()
     foo.update()
     print("Hit return to continue")
-    raw_input()
+    input()
     foo.clear()
     foo.config(type="solution",label=[6])
     foo.plot()
     foo.update()
     print("Hit return to continue")
-    raw_input()
+    input()
     foo.clear()
     foo.config(index=[3])
     foo.plot()
     foo.update()
     print("Hit return to continue")
-    raw_input()
+    input()
 
 if __name__ == "__main__":
     test()

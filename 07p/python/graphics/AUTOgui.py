@@ -1,12 +1,12 @@
 #! /usr/bin/env python
 
 import AUTOCommands
-import Tkinter
-import Pmw
+import tkinter
+from . import Pmw
 import runAUTO
-import plotter
+from . import plotter
 import os
-import tkSimpleDialog
+import tkinter.simpledialog
 import sys
 import AUTOclui
 import AUTOutil
@@ -24,7 +24,7 @@ class AUTOGUIComponent:
         pass
 
     def _getArgs(self,command):
-        args = tkSimpleDialog.askstring("Args for command","Args")
+        args = tkinter.simpledialog.askstring("Args for command","Args")
         self._queueCommand(args,command)
         
     def _queueCommand(self,args,command):
@@ -43,15 +43,15 @@ class AUTOGUIComponent:
         self.messageFunc(name+"("+args+")\n")
     
 
-class AUTOSimpleGUIComponent(Tkinter.Frame,AUTOGUIComponent):
+class AUTOSimpleGUIComponent(tkinter.Frame,AUTOGUIComponent):
     def __init__(self,parent=None,messageFunc=None,textFunc=None,**kw):
-        Tkinter.Frame.__init__(self,parent,**kw)
+        tkinter.Frame.__init__(self,parent,**kw)
         AUTOGUIComponent.__init__(self,messageFunc,textFunc)
         self.default = None
         self.create()
 
     def create(self,messageFunc=None,textFunc=None,runner=None):
-        keys = AUTOCommands.__dict__.keys()
+        keys = list(AUTOCommands.__dict__.keys())
         self.simple()
 
     def simple(self,keys):
@@ -73,7 +73,7 @@ class AUTOSimpleGUIComponent(Tkinter.Frame,AUTOGUIComponent):
                 cmd = getattr(module,key)
                 if (hasattr(cmd,"fun") and hasattr(cmd,"type") and
                     cmd.type==AUTOCommands.SIMPLE):
-                    button = Tkinter.Button(self,text=cmd.shortName,
+                    button = tkinter.Button(self,text=cmd.shortName,
                                             command=lambda c=cmd.fun:
                                                 self._getArgs(c))
                     button.grid(row=i/2 + 1,column=i%2)
@@ -84,7 +84,7 @@ class AUTOSimpleGUIComponent(Tkinter.Frame,AUTOGUIComponent):
                     
     def _getArgs(self,command):
         if self.default is None:
-            self.default = tkSimpleDialog.askstring("Default Name","Name")
+            self.default = tkinter.simpledialog.askstring("Default Name","Name")
             self.defaultEntry.setentry(self.default)
         self._queueCommand(self.default,command)
         
@@ -98,7 +98,7 @@ class AUTOExpertGUIComponent(Pmw.MenuBar,AUTOGUIComponent):
     def create(self):
         if self.textFunc is not None:
             self.textFunc(sys.ps1)
-        keys = AUTOCommands.__dict__.keys()
+        keys = list(AUTOCommands.__dict__.keys())
 
         self.expert(keys)
 
@@ -143,7 +143,7 @@ class AUTOBody(Pmw.ScrolledText):
 
 class AUTOgui:
     def __init__(self,type="simple"):
-        root=Tkinter.Toplevel()
+        root=tkinter.Toplevel()
         
 
         # Create the message bar        

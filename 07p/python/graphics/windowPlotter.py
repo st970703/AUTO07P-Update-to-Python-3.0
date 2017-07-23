@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 try:
-    import Tkinter
+    import tkinter
 except ImportError:
     import tkinter as Tkinter # Python 3
 from graphics import Pmw
@@ -25,7 +25,7 @@ class WindowPlotter(Pmw.MegaToplevel):
                 self.savefig = self.grapher.savefig
                 return
             # without matplotlib, retract the Tk() window
-            parent=Tkinter.Tk()
+            parent=tkinter.Tk()
             parent.withdraw()
             print("\nCannot hide the on-screen plot without matplotlib.")
         Pmw.MegaToplevel.__init__(self, parent)
@@ -47,8 +47,8 @@ class WindowPlotter(Pmw.MegaToplevel):
         self.menuBar.addmenu("Options","View and set options")
         self.menuBar.addmenu("Help","View help on the plotting widget",name='help')
 
-        topbox = Tkinter.Frame(interior,relief="raised",borderwidth=2)
-        topbox.pack(side=Tkinter.BOTTOM)
+        topbox = tkinter.Frame(interior,relief="raised",borderwidth=2)
+        topbox.pack(side=tkinter.BOTTOM)
 
         self.grapher = self.createcomponent('grapher',
                                             (), None,
@@ -73,9 +73,9 @@ class WindowPlotter(Pmw.MegaToplevel):
                                  )
 
 
-        box = Tkinter.Frame(topbox)
+        box = tkinter.Frame(topbox)
 
-        self.grapher.pack(expand=1,fill=Tkinter.BOTH)
+        self.grapher.pack(expand=1,fill=tkinter.BOTH)
         labelEntry = self.createcomponent('labelEntry',
                                           (), None,
                                           Pmw.RadioSelect,box,
@@ -100,7 +100,7 @@ class WindowPlotter(Pmw.MegaToplevel):
         self.typeEntry = typeEntry
         box.grid(row=0)
 
-        box = Tkinter.Frame(topbox)
+        box = tkinter.Frame(topbox)
         self._extraButtons(box)
         box.grid(row=1)
         
@@ -114,7 +114,7 @@ class WindowPlotter(Pmw.MegaToplevel):
     def __labelFunction(self,lst):
         # The return value of a ScrolledListBox is a list of strings, so we change them
         # to integers here
-        lst=map(int,lst)
+        lst=list(map(int,lst))
         # but the _modifyOption method expects a string, so we change the whole thing to a string here
         self._modifyOption("label",str(lst))
 
@@ -149,13 +149,13 @@ class WindowPlotter(Pmw.MegaToplevel):
         optionLabel = Pmw.EntryField(self.diag.interior(),
                                          labelpos="w",
                                          label_text="Option Name",
-                                         entry_state=Tkinter.DISABLED)
+                                         entry_state=tkinter.DISABLED)
         optionLabel.pack(side="top")
 
         valueLabel = Pmw.EntryField(self.diag.interior(),
                                          labelpos="w",
                                          label_text="Old Value",
-                                         entry_state=Tkinter.DISABLED)
+                                         entry_state=tkinter.DISABLED)
         valueLabel.pack(side="top")
 
         valueEntry = Pmw.EntryField(self.diag.interior(),
@@ -214,7 +214,7 @@ class WindowPlotter(Pmw.MegaToplevel):
         self.checktype()
         dct = (cnf or {}).copy()
         dct.update(kw)
-        for key,value in dct.items():
+        for key,value in list(dct.items()):
             if key == "type":
                 self.labelEntry.invoke(value)
             if key in ["type","label","label_defaults",
