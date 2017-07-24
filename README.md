@@ -20,6 +20,14 @@ This can be found in the related repository.
 However, 'AUTO Runtime Error: Solution without data.' appears after the changes.  
 It appears whenever a .auto or a "couple" file is run.
 
+Detail of the error:
+```
+AUTO> auto("couple2.auto")
+couple2.auto, line 1:
+
+AUTO Runtime Error: Solution without data.
+```
+
 According to the auto documentation, this error shows that auto has crashed and is related to the internal of auto.  
-Deeper understanding of the auto code, especially the non-python parts is require.  
+Deeper understanding of the auto code, especially the non-python parts is required.  
 
