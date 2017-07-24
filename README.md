@@ -1,5 +1,6 @@
 # AUTO-07-Update-to-Python-3.0
-the code for auto is available at https://sourceforge.net/projects/auto-07p/files/
+the code for auto is available at  
+https://sourceforge.net/projects/auto-07p/files/  
 
 AUTO-07P :
 CONTINUATION AND BIFURCATION SOFTWARE
@@ -16,8 +17,9 @@ THe changes in the python code include reconfiguring the imports and the packagi
 The matplotlib zooming and the inderError problems have been fixed.  
 This can be found in the related repository.  
 
-However, 'AUTO Runtime Error: Solution without data.' appears.  
+However, 'AUTO Runtime Error: Solution without data.' appears after the changes.  
+It appears whenever a .auto or a "couple" file is run.
 
-According to the auto documentation, this error is related to the internal of auto.  
+According to the auto documentation, this error shows that auto has crashed and is related to the internal of auto.  
 Deeper understanding of the auto code, especially the non-python parts is require.  
 
